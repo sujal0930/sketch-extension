@@ -6,6 +6,11 @@
     "background": {
         "scripts": ["background.js"]
     },
+    "web_accesible_resources":[
+        {
+            "resources":["JSON/storage.json"]
+        }
+    ],
     "permissions":["tabs"],
     "content_scripts":[
         {
