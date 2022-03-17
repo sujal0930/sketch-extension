@@ -4,9 +4,9 @@
     "name":"p5 sketch",
     "version":"0.1",
     "background": {
-        "scripts": ["background.js"]
+        "scripts    ": ["background.js"]
     },
-    "permissions":["tabs"],
+    "permissions":["tabs","storage"],
     "content_scripts":[
         {
             "js":["p5/p5.js","sketch.js"],
