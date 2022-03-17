@@ -1,7 +1,6 @@
 const history=[]
 function setup(){
     document.body.style['userSelect'] = 'none';
-    // console.log("setup");
     windowHeight= document.body.clientHeight;
     windowWidth = document.body.clientWidth;
     let c = createCanvas(windowWidth, windowHeight);
