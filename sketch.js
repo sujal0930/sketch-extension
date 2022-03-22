@@ -1,7 +1,7 @@
 const history = []
 
 var url_key = window.location.href;
-
+// console.log();
 // console.log(url_key)
 
 function setup() {
@@ -13,10 +13,8 @@ function setup() {
     c.style("z-index", 1000000000000000);
     c.style("pointer-events", "none");
     c.position(0, 0);
-}
 
-function draw() {
-   
+
     chrome.runtime.onMessage.addListener(
         function (request, sender, snedResponse) {
             if (request["action"] === "clear") {
@@ -28,13 +26,11 @@ function draw() {
                 init_color = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)];
             }
             if (request["action"] === "restore") {
-
-                chrome.storage.sync.get('url_key', function (result) {
-                    if (result.url_key) {
-                        
-                        temp = result.url_key;
-                        
-                        // console.log(temp);
+                chrome.storage.sync.get(`${url_key}`, function (result) {
+                    // console.log(result);
+                    if (result[url_key] != undefined) {
+                        // console.log(result);
+                        temp = result[url_key];
                         for (ele of temp) {
                             
                             stroke(ele.rgb.r, ele.rgb.g, ele.rgb.b);
@@ -48,12 +44,16 @@ function draw() {
                 });
             }
             if (request["action"] === "save") {
-                    chrome.storage.sync.clear();
-                    chrome.storage.sync.set({'url_key': history}, function () {
-                       
+                // console.log("Ye set hora",url_key)
+                    // chrome.storage.sync.clear();
+                    chrome.storage.sync.set({[url_key]: history}, function () {
+                    //    console.log("saved");
                     });
                 }
             });
+}
+
+function draw() {
   
     stroke(init_color[0], init_color[1], init_color[2]);
     strokeWeight(3);
