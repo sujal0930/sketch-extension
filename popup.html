@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,18 +8,131 @@
     <title>Document</title>
 </head>
 <style>
-    .body{
-        width: 100%;
-        height: 100%;
-        background-color: #f5f5f5;
+    html {
+        width: 200px;
+        height: 200px;
+        background: none;
+        background-color: #A0CFD3;
+        border-radius: 20px;
+    }
+
+    .btns {
+        padding: 5%;
+
+    }
+
+    .btn {
+        margin-bottom: 10%;
+        background-color: #8D94BA;
+        border: none;
+        border-radius: 1em;
+        height: 2em;
+        padding: 0 10px 0 10px;
+    }
+
+    .btn:hover {
+        background-color: #9A7AA0;
+    }
+
+    #id {
+        border: none;
+    }
+
+    .heading {
+        font-size: 2em;
+        font-weight: bolder;
+        font-family: 'Roboto', sans-serif;
+        color: #c52a5e;
+        text-align: center;
+    }
+
+    .onoff{
+        margin-top: 10%;
+        margin-bottom: 0;
+        font-size: 1.5em;
+        font-weight: bolder;
+        font-family: 'Roboto', sans-serif;
+        color: #c52a5e;
+        float: right;
+    }
+
+    .switch {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 34px;
+    }
+
+    .switch input {
+        opacity: 0;
+        width: 0;
+        height: 0;
+    }
+
+    .slider {
+        position: absolute;
+        cursor: pointer;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-color: #ccc;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    .slider:before {
+        position: absolute;
+        content: "";
+        height: 26px;
+        width: 26px;
+        left: 4px;
+        bottom: 4px;
+        background-color: white;
+        -webkit-transition: .4s;
+        transition: .4s;
+    }
+
+    input:checked+.slider {
+        background-color: #2196F3;
+    }
+
+    input:focus+.slider {
+        box-shadow: 0 0 1px #2196F3;
+    }
+
+    input:checked+.slider:before {
+        -webkit-transform: translateX(26px);
+        -ms-transform: translateX(26px);
+        transform: translateX(26px);
+    }
+
+    /* Rounded sliders */
+    .slider.round {
+        border-radius: 34px;
+    }
+
+    .slider.round:before {
+        border-radius: 50%;
     }
 </style>
+
 <body>
-    hello there!
-    <button type="button" id="clear">Clear screen</button>
-    <button type="button" id="color">change color</button>
-    <button type="button" id="restore">restore Changes</button>
-    <button type="button" id="save">save Changes</button>
+    <div class="heading">E-NOTES</div>
+    <div class="onoff">
+        <label class="switch">
+            <input id="isWorking" type="checkbox" checked>
+            <span class="slider round"></span>
+        </label>
+    </div>
+    <br>
+    <div class="btns">
+        <button class="btn" type="button" id="clear">Clear Screen</button><br>
+        <button class="btn" type="button" id="color">Change Color</button><br>
+        <button class="btn" type="button" id="restore">Restore Changes</button><br>
+        <button class="btn" type="button" id="save">Save Changes</button><br>
+    </div>
     <script src="popup.js"></script>
 </body>
+
 </html>
