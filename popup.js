@@ -23,11 +23,21 @@ save = document.getElementById("save").onclick = function(){
     });
 }
 
-let isWorking = document.getElementById("isWorking").checked;
-if(isWorking){
+
+var checkbox = document.querySelector("input[name=checkbox]");
+
+checkbox.addEventListener('change', function() {
+  if (this.checked) {
+    // console.log("Checkbox is checked..");
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
         chrome.tabs.sendMessage(tabs[0].id, {action: "isWorking"});
     });
-}
+} else {
+      chrome.tabs.query({active: true, currentWindow: true}, function(tabs) {
+          chrome.tabs.sendMessage(tabs[0].id, {action: "notWorking"});
+      });
+  }
+});
+
 
 
