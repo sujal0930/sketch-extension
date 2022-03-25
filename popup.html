@@ -46,7 +46,7 @@
         text-align: center;
     }
 
-    .onoff{
+    .onoff {
         margin-top: 10%;
         margin-bottom: 0;
         font-size: 1.5em;
@@ -119,18 +119,25 @@
 
 <body>
     <div class="heading">E-NOTES</div>
+    <!-- Toggle button -->
     <div class="onoff">
         <label class="switch">
-            <input id="isWorking" name ="checkbox" type="checkbox">
+            <input id="isWorking" name="checkbox" type="checkbox">
             <span class="slider round"></span>
         </label>
     </div>
     <br>
+
     <div class="btns">
+        <!-- clear button -->
         <button class="btn" type="button" id="clear">Clear Screen</button><br>
+        <!-- color change button -->
         <button class="btn" type="button" id="color">Change Color</button><br>
+        <!-- restore button -->
         <button class="btn" type="button" id="restore">Restore Changes</button><br>
+        <!-- Save changes button -->
         <button class="btn" type="button" id="save">Save Changes</button><br>
+        <!-- <input type="button"> -->
     </div>
     <script src="popup.js"></script>
 </body>

@@ -1,11 +1,27 @@
-isActive = false;
+// restoring the state of the sketch onload
+window.onload = function () {
+    try {
+        restoreState();
+    } catch (e) {
+    }
+}
+// isacrove variable declared to check if the user is active on the page
+let isActive;
+try {
+    chrome.storage.sync.get(['activeState'], function (result) {
+        isActive = result.activeState;
+    });
+}
+catch (e) {
+}
 chrome.runtime.onMessage.addListener(
     function (request) {
         if (request["action"] === "clear") {
-            // clear();
+
             clearScreen();
         }
         if (request["action"] === "color") {
+            
             changeColor();
         }
         if (request["action"] === "restore") {
@@ -18,14 +34,17 @@ chrome.runtime.onMessage.addListener(
         }
         if (request["action"] === "isWorking") {
             isActive = true;
-            console.log(isActive);
+            chrome.storage.sync.set({ activeState: true })
+
         }
         if (request["action"] === "notWorking") {
             isActive = false;
-            console.log(isActive);
+            chrome.storage.sync.set({ activeState: false })
+
         }
     });
 
+// initialsing the variable so that it can be accessed globally.
 let c;
 // Array for local storage.
 const history = []
@@ -33,14 +52,17 @@ const history = []
 var url_key = window.location.href;
 
 
+// funtion for clearing canvas
 function clearScreen() {
     clear();
 }
 
+// function for changing the color of the pen
 function changeColor() {
     init_color = [Math.floor(Math.random() * 255), Math.floor(Math.random() * 255), Math.floor(Math.random() * 255)];
 }
 
+// function to restore the state of the sketch
 function restoreState() {
     chrome.storage.sync.get(`${url_key}`, function (result) {
 
@@ -49,6 +71,7 @@ function restoreState() {
             temp = result[url_key];
 
             for (ele of temp) {
+                strokeWeight(3);
                 stroke(ele.rgb.r, ele.rgb.g, ele.rgb.b);
                 line(ele.x, ele.y, ele.px, ele.py);
             }
@@ -59,12 +82,12 @@ function restoreState() {
 
     });
 }
-
+// function to save the state of the sketch
 function saveState() {
     chrome.storage.sync.set({ [url_key]: history });
 }
 
-
+// function calling from p5.js
 function setup() {
 
     document.body.style['userSelect'] = 'none';
@@ -78,6 +101,8 @@ function setup() {
     c.style("pointer-events", "none");
     c.position(0, 0);
 }
+ 
+// function calling from p5.js
 function draw() {
     if (isActive) {
         stroke(init_color[0], init_color[1], init_color[2]);
